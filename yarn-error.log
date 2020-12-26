@@ -1,0 +1,53 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn
+
+PATH: 
+  /usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
+Yarn version: 
+  1.12.3
+
+Node version: 
+  14.15.3
+
+Platform: 
+  darwin x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, copyfile '/Users/miloshu/Library/Caches/Yarn/v4/npm-ansi-styles-3.2.1-41fbb20243e50b12be0f04b8dedbf07520ce841d/node_modules/ansi-styles/license' -> '/Users/miloshu/Desktop/v3-mall/node_modules/@babel/highlight/node_modules/ansi-styles/license'
+
+npm manifest: 
+  {
+    "name": "v3",
+    "version": "0.0.0",
+    "scripts": {
+      "dev": "vite",
+      "build": "vite build"
+    },
+    "dependencies": {
+      "axios": "^0.21.0",
+      "js-cookie": "^2.2.1",
+      "js-md5": "^0.7.3",
+      "swiper": "^5.2.0",
+      "vant": "^3.0.0-rc.3",
+      "vue": "^3.0.2",
+      "vue-awesome-swiper": "^4.1.1",
+      "vue-router": "^4.0.0-rc.1",
+      "vuex": "^4.0.0-beta.4"
+    },
+    "devDependencies": {
+      "@vue/compiler-sfc": "^3.0.0-rc.1",
+      "less": "^4.0.0",
+      "less-loader": "^7.1.0",
+      "postcss-loader": "^4.0.4",
+      "sass": "^1.28.0",
+      "vite": "^1.0.0-rc.9",
+      "vite-plugin-proxy": "^0.5.0"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
