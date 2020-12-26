@@ -8,12 +8,12 @@ export default {
   },
   proxy: {
     '/api': {
-      target: 'http://172.31.44.177',
+      target: 'http://localhost:3000',
       changeOrigin: true,
       secure: false,
     },
     '/test': {
-      target: 'http://49.235.41.66:38080/app/mock/17/get/',
+      target: 'https://hn.algolia.com/api/get/',
       changeOrigin: true,
       secure: false,
     }
