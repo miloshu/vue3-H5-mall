@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { ref, reactive  } from 'vue'
+import { ref, reactive } from 'vue'
 import TabBar from '../components/TabBar/index.vue'
 export default {
   name: 'AppLayout',
@@ -35,7 +35,7 @@ export default {
           to: {
             name: 'ProductList'
           },
-          icon: 'cart-circle'
+          icon: 'apps-o'
         },
         {
           title: '购物车',
@@ -65,5 +65,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+.app-container {
+  width: 100%;
+  height: 100%;
+  // .layout-footer {
+  //   height: 5rem;
+  //   .van-tabbar__placeholder {
+  //     height: 100%;
+  //   }
+  //   .van-tabbar {
+  //     height: 100%;
+  //   }
+  // }
+}
 </style>

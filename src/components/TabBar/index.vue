@@ -38,4 +38,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+$blue: #7232dd;
+.van-tabbar-item--active {
+  color: $blue;
+}
 </style>

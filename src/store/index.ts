@@ -1,9 +1,9 @@
 import { createStore } from 'vuex';
-
+const TokenKey = 'mall_token';
 export default createStore({
   state: {
     userName: '',
-    token: '',
+    token: TokenKey,
     navBarShow: true,
   },
   mutations: {

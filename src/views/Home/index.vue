@@ -9,86 +9,153 @@
         placeholder="请输入搜索关键词"
       />
     </van-sticky>
-    <van-swipe class="my-swipe" :autoplay="3000" lazy-render>
-      <van-swipe-item v-for="image in images" :key="image">
-        <van-image :src="image" />
+    <van-swipe class="swipe-container" :autoplay="3000" lazy-render>
+      <van-swipe-item v-for="image in images" :key="image.goods_id">
+        <van-image :src="image.image_src" />
       </van-swipe-item>
     </van-swipe>
-    <!-- <van-grid>
-      <van-grid-item icon="photo-o" text="文字" />
-      <van-grid-item icon="photo-o" text="文字" />
-      <van-grid-item icon="photo-o" text="文字" />
-      <van-grid-item icon="photo-o" text="文字" />
-    </van-grid> -->
-<!-- 
-    <van-grid :column-num="3">
-      <van-grid-item v-for="value in 6" :key="value" icon="photo-o" text="文字" />
+    <van-grid>
+      <van-grid-item v-for="(cate, index) in cateList" :key="index">
+        <van-image :src="cate.image_src" />
+      </van-grid-item>
     </van-grid>
-
-    <van-grid :border="false" :column-num="3">
-      <van-grid-item>
-        <van-image src="https://img.yzcdn.cn/vant/apple-1.jpg" />
-      </van-grid-item>
-      <van-grid-item>
-        <van-image src="https://img.yzcdn.cn/vant/apple-2.jpg" />
-      </van-grid-item>
-      <van-grid-item>
-        <van-image src="https://img.yzcdn.cn/vant/apple-3.jpg" />
-      </van-grid-item>
-    </van-grid> -->
-    <!-- <van-button type="danger" @click="handleBtn">vuex按钮</van-button>
-    <h1>{{name}}</h1>
-    <p>{{ msg }}</p>
-    <ul>
-      <li v-for="(item,index) in list" :key="index">
-        <router-link :to="`/detail/${item.id}`">{{item.name}}</router-link>
-      </li>
-    </ul> -->
-
+    <div class="floor-wrap">
+      <div class="floor-group" v-for="(floor, index) in floorLIst" :key="index">
+        <!-- 标题 -->
+        <div class="floor-title">
+          <img :src="floor.floor_title.image_src" alt="">
+        </div>
+        <!-- 内容 -->
+        <div class="floor-list" v-for="item in floor.product_list" :key="item.name">
+          <img :src="item.image_src" alt="">
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { computed, reactive, toRefs } from 'vue'
+import { onMounted, computed, reactive, toRefs } from 'vue'
 import { useStore } from 'vuex'
-// import { getUser } from './../api/home'
+import { getSwiperList, getCateLIst, getFloorLIst } from '/@/api/home'
 export default {
   setup () {
     const store = useStore()
     const name = computed(() => store.state.userNmae)
     const data = reactive({
       value: '',
-      images: [
-        'https://img.yzcdn.cn/vant/apple-1.jpg',
-        'https://img.yzcdn.cn/vant/apple-2.jpg'
-      ]
+      images: [],
+      cateList: [],
+      floorLIst: []
+    })
+    const methods = reactive({
+      getSwiperList: async () => {
+        try {
+          const res = await getSwiperList()
+          if (res.data && res.data.meta.status === 200) {
+            data.images = res.data.message
+          }
+        } catch (error) {}
+      },
+      getCateLIst: async () => {
+        try {
+          const res = await getCateLIst()
+          data.cateList = res.data.message
+        } catch (error) {}
+      },
+      getFloorLIst: async () => {
+        try {
+          const res = await getFloorLIst()
+          data.floorLIst = res.data.message
+        } catch (error) {}
+      },
+      handleBtn: () => {
+        store.commit('getUserNmae', 'Vue')
+      }
+    })
+    onMounted(() => {
+      methods.getSwiperList()
+      methods.getCateLIst()
+      methods.getFloorLIst()
     })
     const refData = toRefs(data)
-    const handleBtn = () => {
-      store.commit('getUserNmae', 'Vue')
-    }
+    const refMethods = toRefs(methods)
     return {
+      name,
       ...refData,
-      handleBtn
+      ...refMethods
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+$blue: #7232dd;
+.home-page {
+  height: 100vh;
   .search-bar {
     height: 5rem;
   }
-  .my-swipe .van-swipe-item {
+  .van-swipe__indicator--active {
+    background-color: $blue;
+  }
+  .swipe-container .van-swipe-item {
     color: #fff;
     font-size: 20px;
-    height: 20rem;
-    line-height: 20rem;
+    height: 15rem;
+    line-height: 15rem;
     text-align: center;
-    background-color: #39a9ed;
+    background-color: $blue;
+    .van-image {
+      height: 100%;
+    }
     img {
       width: 100%;
       height: 100%;
     }
   }
+  .van-grid {
+    display: flex;
+    .van-grid-item {
+      flex: 1;
+    }
+  }
+  .floor-wrap {
+    width: 100%;
+    padding-bottom: 5rem;
+    .floor-group {
+      width: 100%;
+      overflow: hidden;
+      .floor-title {
+        padding: .5rem;
+        img {
+          width: 100%;
+        }
+      }
+      .floor-list {
+        float: left;
+        width: 33.33%;
+        // padding: 0 1rem;
+        img {
+          width: 100%;
+        }
+        // 后4个
+        &:nth-last-child(-n+4) {
+          // 原图的宽高232*386
+          // 第一张图 height: 33.33vw * 386 / 232
+          height: 33.33vw * 386 / 232 / 2;
+          border-left: .8rem solid #fff;
+          img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+        &:nth-child(3),
+        &:nth-child(4) {
+          border-bottom: .8rem solid #fff;
+        }
+      }
+    }
+  }
+}
 </style>

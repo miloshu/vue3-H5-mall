@@ -1,7 +1,11 @@
 /** 
  * @description  按需引入Vant
 */
-import { Icon, Button, Tabbar, TabbarItem, Search, Image as VanImage, SwipeCell, Badge, Swipe, SwipeItem, Sticky } from 'vant'
+import { 
+  Icon, Button, Tabbar, TabbarItem, Search,
+  Image as VanImage, SwipeCell, Badge, Swipe,
+  SwipeItem, Sticky, Lazyload, Grid, GridItem
+} from 'vant'
 const pluginsVant = [
   Button,
   Icon,
@@ -10,9 +14,12 @@ const pluginsVant = [
   Tabbar,
   VanImage,
   Swipe,
+  Grid, 
+  GridItem,
   SwipeItem,
   SwipeCell,
   Sticky,
+  Lazyload,
   TabbarItem
 ]
 export const vantUI = {

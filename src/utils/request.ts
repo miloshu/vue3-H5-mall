@@ -1,12 +1,26 @@
 import axios from 'axios'
 import { Notify } from 'vant'
+import store from "../store";
 import { useRouter } from 'vue-router'
 axios.defaults.withCredentials = true
 
 const service = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'http://api-hmugo-web.itheima.net',
   timeout: 5000
 })
+
+// request拦截器
+service.interceptors.request.use(
+  config => {
+    config.headers['token'] = store.state.token
+    return config
+  },
+  error => {
+    // Notify.clear();
+    console.log('error:', error)
+    return Promise.reject('error:' + error)
+  }
+)
 
 service.interceptors.response.use(
   response => {
