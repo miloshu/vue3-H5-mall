@@ -10,12 +10,12 @@ export default {
     '/api': {
       target: 'http://api-hmugo-web.itheima.net',
       changeOrigin: true,
-      ws: true,
-      rewrite: path => path.replace(/^\/api/, ''),
+      // ws: true,
+      // rewrite: path => path.replace(/^\/api/, ''),
       // pathRewrite: {
       //   '/api': ''
       // },
-      secure: false
+      // secure: false
     },
     // '/test': {
     //   target: 'https://hn.algolia.com/api/get/',

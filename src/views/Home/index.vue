@@ -34,7 +34,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { onMounted, computed, reactive, toRefs } from 'vue'
 import { useStore } from 'vuex'
 import { getSwiperList, getCateLIst, getFloorLIst } from '/@/api/home'
@@ -51,7 +51,7 @@ export default {
     const methods = reactive({
       getSwiperList: async () => {
         try {
-          const res = await getSwiperList()
+          const res = await getSwiperList({})
           if (res.data && res.data.meta.status === 200) {
             data.images = res.data.message
           }
@@ -59,13 +59,13 @@ export default {
       },
       getCateLIst: async () => {
         try {
-          const res = await getCateLIst()
+          const res = await getCateLIst({})
           data.cateList = res.data.message
         } catch (error) {}
       },
       getFloorLIst: async () => {
         try {
-          const res = await getFloorLIst()
+          const res = await getFloorLIst({})
           data.floorLIst = res.data.message
         } catch (error) {}
       },
@@ -93,8 +93,11 @@ export default {
 $blue: #7232dd;
 .home-page {
   height: 100vh;
-  .search-bar {
-    height: 5rem;
+  .van-sticky {
+    height: 50px;
+    .search-bar {
+      height: 100%;
+    }
   }
   .van-swipe__indicator--active {
     background-color: $blue;
@@ -107,6 +110,7 @@ $blue: #7232dd;
     text-align: center;
     background-color: $blue;
     .van-image {
+      width: 100%;
       height: 100%;
     }
     img {

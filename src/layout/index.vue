@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { ref, reactive } from 'vue'
 import TabBar from '../components/TabBar/index.vue'
 export default {

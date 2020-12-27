@@ -4,7 +4,8 @@
 import { 
   Icon, Button, Tabbar, TabbarItem, Search,
   Image as VanImage, SwipeCell, Badge, Swipe,
-  SwipeItem, Sticky, Lazyload, Grid, GridItem
+  SwipeItem, Sticky, Lazyload, Grid, GridItem,
+  TreeSelect
 } from 'vant'
 const pluginsVant = [
   Button,
@@ -20,7 +21,8 @@ const pluginsVant = [
   SwipeCell,
   Sticky,
   Lazyload,
-  TabbarItem
+  TabbarItem,
+  TreeSelect
 ]
 export const vantUI = {
   install: function(vm: any) {
