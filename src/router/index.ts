@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import teacherRoutes from './modules/teacher'
+import presidentRoutes from './modules/president'
 // import store from '../store'
 // import { Notify } from 'vant'
 const routes = [
@@ -44,6 +44,6 @@ const routes = [
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: [...routes, ...teacherRoutes]
+  routes: [...routes, ...presidentRoutes]
 })
 export default router
