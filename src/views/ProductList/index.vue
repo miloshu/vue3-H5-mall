@@ -11,10 +11,27 @@
     </van-sticky>
     <div class="product-content">
       <ul class="left-cates">
-
+        <li v-for="(item, index) in leftMenuList"
+          :key="index" @click="changeClassifys(index)"
+          :class="{active: activeIndex === index}"
+          >
+          <span :class="{'active': activeId === item.cat_id}">{{item.cat_name}}</span>
+        </li>
       </ul>
       <ul class="right-cates">
-        
+        <li v-for="(item, index) in rightConList" :key="index" @click="changeClassifys(item.cat_id)">
+          <div class="goods-title">
+            <span class="goods-delimiter">/</span>
+            <span class="title">{{item.cat_name}}</span>
+            <span class="goods-delimiter">/</span>
+          </div>
+          <div class="goods-list">
+            <a href="" v-for="(v, idx) in item.children" :key="idx">
+              <img :src="v.cat_icon" alt="">
+              <div>{{v.cat_name}}</div>
+            </a>
+          </div>
+        </li>
       </ul>
     </div>
   </div>
@@ -60,6 +77,9 @@ export default defineComponent({
           console.log(res.data.message[0].children, '999999')
         } catch (error) {}
       },
+      changeClassifys: (index: number) => {
+        state.activeIndex = index
+      }
     })
     onMounted(() => {
       methods.getCategoriesList()
@@ -67,12 +87,13 @@ export default defineComponent({
     const refData = toRefs(state)
     return {
       ...refData,
-      items
+      ...methods
     }
   }
 })
 </script>
 <style lang='scss' scoped>
+$blue: #7232dd;
 .product-list {
   width: 100%;
   height: 100vh;
@@ -84,20 +105,67 @@ export default defineComponent({
   }
   .product-content {
     display: flex;
-    height: 100%;
-    // height: calc(100% - 100px);
+    height: 100vh;
+    // position: relative;
+    // height: calc(100% - 50px);
+    // padding: 50px 0;
   }
   .left-cates, .right-cates {
     height: 100%;
+    padding-bottom: 50px;
+    font-size: 1.3rem;
     overflow-y: auto;
+    overflow-x: hidden;
   }
   .left-cates {
     flex: 1;
-    background-color: yellowgreen;
+    li {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 4rem;
+      font-size: 1.2rem;
+      &.active {
+        color: $blue;
+        border-left: 2px solid $blue;
+      }
+    }
   }
   .right-cates {
     flex: 3;
-    background-color: pink;
+    li {
+      .goods-title {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 4rem;
+        font-size: 1.2rem;
+        .goods-delimiter {
+          color: #ccc;
+          padding: 0 5px;
+        }
+        .title {
+
+        }
+      }
+      .goods-list {
+        display: flex;
+        flex-wrap: wrap;
+        a {
+          display: inline-block;
+          width: 33.33%;
+          text-align: center;
+          img {
+            width: 50%;
+          }
+          div {
+            font-size: 1.2rem;
+            color: #000;
+          }
+        }
+      }
+      
+    }
   }
 }
 </style>
