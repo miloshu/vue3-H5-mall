@@ -45,8 +45,9 @@ interface stateProps {
   searchVal: string;
   activeId: number;
   activeIndex: number;
-  leftMenuList: object[];
-  rightConList: object[];
+  lists: any[];
+  leftMenuList: any[];
+  rightConList: any[];
 }
 export default defineComponent({
   setup () {
@@ -54,21 +55,22 @@ export default defineComponent({
       searchVal: '',
       activeId: 1,
       activeIndex: 0,
+      lists: [],
       leftMenuList: [],
       rightConList: []
     });
     const methods = reactive({
-      getCategoriesList: async () =>  {
+      getCategoriesList: async () => {
         try {
           const res = await getCategoriesList({})
-          const lists = res.data.message
-          state.leftMenuList = lists.filter(v => v.cat_name)
-          state.rightConList = lists[0].children
-          console.log(res.data.message[0].children, '999999')
+          state.lists = res.data.message
+          state.leftMenuList = state.lists.filter(v => v.cat_name)
+          state.rightConList = state.lists[0].children
         } catch (error) {}
       },
       changeClassifys: (index: number) => {
         state.activeIndex = index
+        state.rightConList = state.lists[index].children
       }
     })
     onMounted(() => {
