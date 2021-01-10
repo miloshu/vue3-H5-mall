@@ -59,7 +59,7 @@ import { login, registe } from '/@/api/login'
 import Cookies from 'js-cookie'
 import store from '/@/store'
 interface DataProps {
-  loading: string;
+  loading: boolean;
   isRem: boolean;
   user: object;
   login: () => void;

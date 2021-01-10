@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="tab-bar-wrap">
     <van-tabbar fixed route placeholder v-model="active" @change="handleChange">
       <van-tabbar-item
         v-for="(item,index) in tabData"
@@ -12,7 +12,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { ref } from 'vue'
 export default {
   name: 'TabBar',
@@ -22,11 +22,11 @@ export default {
       default: () => ([])
     }
   },
-  emits:['chang'],
+  emits: ['chang'],
   setup (props, context) {
-    console.log(props.data,'props')
+    // console.log(props.data,'props')
     const active = ref(0)
-    const handleChange = (value) => {
+    const handleChange = (value: number) => {
       context.emit('chang', value)
     }
     return {
@@ -37,9 +37,9 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-$blue: #7232dd;
+<style lang="scss">
+$purple: #7232dd;
 .van-tabbar-item--active {
-  color: $blue;
+  color: $purple !important;
 }
 </style>

@@ -6,7 +6,7 @@
       </keep-alive>
       <router-view v-else></router-view>
     </div>
-    <div class="layout-footer">
+    <div class="layout-footer" v-if="store.state.navBarShow">
       <TabBar :tab-data="state.tabBar" @chang="handleChange"></TabBar>
     </div>
   </div>
@@ -14,6 +14,7 @@
 
 <script lang="ts">
 import { ref, reactive } from 'vue'
+import { useStore } from 'vuex'
 import TabBar from '../components/TabBar/index.vue'
 export default {
   name: 'AppLayout',
@@ -21,6 +22,7 @@ export default {
     TabBar
   },
   setup () {
+    const store = useStore()
     const state = reactive({
       tabBar: [
         {
@@ -58,6 +60,7 @@ export default {
     }
     return {
       state,
+      store,
       handleChange
     }
   }

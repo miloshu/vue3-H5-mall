@@ -19,14 +19,14 @@
         </li>
       </ul>
       <ul class="right-cates">
-        <li v-for="(item, index) in rightConList" :key="index" @click="changeClassifys(item.cat_id)">
+        <li v-for="(item, index) in rightConList" :key="index">
           <div class="goods-title">
             <span class="goods-delimiter">/</span>
             <span class="title">{{item.cat_name}}</span>
             <span class="goods-delimiter">/</span>
           </div>
           <div class="goods-list">
-            <a href="" v-for="(v, idx) in item.children" :key="idx">
+            <a v-for="(v, idx) in item.children" :key="idx" @click="goToListDetail(item.cat_id)">
               <img :src="v.cat_icon" alt="">
               <div>{{v.cat_name}}</div>
             </a>
@@ -41,6 +41,7 @@
 import { onMounted, reactive, toRefs, defineComponent } from 'vue'
 import { getCategoriesList } from '/@/api/category'
 import { setStorage, getStorage } from '/@/utils/storage'
+import { useRouter } from 'vue-router'
 // 类型定义
 interface stateProps {
   searchVal: string;
@@ -52,6 +53,7 @@ interface stateProps {
 }
 export default defineComponent({
   setup () {
+    const router = useRouter()
     const state: stateProps = reactive({
       searchVal: '',
       activeId: 1,
@@ -79,6 +81,12 @@ export default defineComponent({
         // 让滚动条回滚到顶部
         let oDom = document.querySelector('.right-cates') as Element
         oDom.scrollTop = 0
+      },
+      goToListDetail: (id: number) => {
+        router.push({
+          path: '/product-list-detail',
+          query: { cid: id }
+        })
       }
     })
     onMounted(() => {

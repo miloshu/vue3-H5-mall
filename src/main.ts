@@ -15,7 +15,7 @@ import { vantUI } from './plugin/vant'
 router.beforeEach((to, from, next) => {
   // do something
   // 判断navBar是显示还是隐藏
-  if (to.path === '/' || to.path === '/product-list' || to.path === '/cart' || to.path === '/my-center') {
+  if (to.path === '/home' || to.path === '/product-list' || to.path === '/cart' || to.path === '/my-center') {
     store.state.navBarShow = true
   } else {
     store.state.navBarShow = false
