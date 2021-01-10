@@ -53,7 +53,7 @@ export default {
         try {
           const res = await getSwiperList({})
           if (res.data && res.data.meta.status === 200) {
-            data.images = res.data.message
+            data.images = res.data.message || []
           }
         } catch (error) {}
       },

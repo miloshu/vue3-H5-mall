@@ -40,6 +40,7 @@
 <script lang="ts">
 import { onMounted, reactive, toRefs, defineComponent } from 'vue'
 import { getCategoriesList } from '/@/api/category'
+import { setStorage, getStorage } from '/@/utils/storage'
 // 类型定义
 interface stateProps {
   searchVal: string;
@@ -64,17 +65,45 @@ export default defineComponent({
         try {
           const res = await getCategoriesList({})
           state.lists = res.data.message
+          // 存储数据
+          setStorage('categories', {time: Date.now(), data: state.lists})
+          // 商品列表左侧数据
           state.leftMenuList = state.lists.filter(v => v.cat_name)
+          // 商品列表右侧数据
           state.rightConList = state.lists[0].children
         } catch (error) {}
       },
       changeClassifys: (index: number) => {
         state.activeIndex = index
         state.rightConList = state.lists[index].children
+        // 让滚动条回滚到顶部
+        let oDom = document.querySelector('.right-cates') as Element
+        oDom.scrollTop = 0
       }
     })
     onMounted(() => {
-      methods.getCategoriesList()
+      /*  1. 先判断本地存储中有没有旧数据 {time: Date.now(), data: [...]}
+       *  2. 没有旧数据则发送新的请求
+       *  3. 有旧数据,且旧数据没有过期, 就是用本地存储中的旧数据
+      */
+      // 1. 获取本地存储中的数据
+      const categories = getStorage('categories') as any
+      // 2. 判断是否存在
+      if (!categories) {
+        // 不存在, 则发送请求获取数据
+        methods.getCategoriesList()
+      } else {
+        // 存在旧数据, 是否过期? , 定义过期时间 60s
+        if (Date.now() - categories.time > 1000 * 60) {
+          // 已过期, 重新发送请求
+          methods.getCategoriesList()
+        } else {
+          // 使用旧数据
+          state.lists = categories.data
+          state.leftMenuList = state.lists.filter(v => v.cat_name)
+          state.rightConList = state.lists[0].children
+        }
+      }
     })
     const refData = toRefs(state)
     return {
@@ -98,9 +127,6 @@ $blue: #7232dd;
   .product-content {
     display: flex;
     height: 100vh;
-    // position: relative;
-    // height: calc(100% - 50px);
-    // padding: 50px 0;
   }
   .left-cates, .right-cates {
     height: 100%;
@@ -136,9 +162,6 @@ $blue: #7232dd;
           color: #ccc;
           padding: 0 5px;
         }
-        .title {
-
-        }
       }
       .goods-list {
         display: flex;
@@ -156,7 +179,6 @@ $blue: #7232dd;
           }
         }
       }
-      
     }
   }
 }
