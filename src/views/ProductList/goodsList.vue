@@ -12,9 +12,6 @@
       show-action
       placeholder="请输入搜索关键词"
       @search="onSearch">
-      <template #action>
-        <div @click="onSearch">搜索</div>
-      </template>
     </van-search>
     <van-tabs v-model="active" @click="tabClick" class="tabs-box">
       <van-tab v-for="item in tabs" :title="item.name" :key="item.id">
@@ -41,6 +38,21 @@ import { useRouter, useRoute } from 'vue-router'
 import { Toast } from 'vant';
 import TabBar from '/@/components/TabBar/index.vue'
 import { searchCategoriesList } from '/@/api/category'
+// 类型定义
+interface searchParams {
+  query: string,
+  cid: number | string;
+  pagenum: number;
+  pagesize: number;
+}
+interface stateProps {
+  loading: boolean;
+  totalPage: number | string;
+  searchParams: searchParams;
+  tabs: any[];
+  goodList: any[];
+  [prop: string]: any;
+}
 export default {
   name: 'ProductListDetail',
   components: {
@@ -50,15 +62,16 @@ export default {
     const router = useRouter()
     const route = useRoute()
     const active = ref(1)
-    const state = reactive({
+    const state: stateProps = reactive({
       loading: false,
       totalPage: 1, // 总页数
       searchParams: {
         query: '',
-        cid: 9 || route.query.cid,
+        cid: route.query.cid || 9,
         pagenum: 1,
         pagesize: 10
       },
+      goodList: [],
       tabs: [
         {
           id: 100010001,
@@ -75,8 +88,7 @@ export default {
           name: '价格',
           isActive: false
         },
-      ],
-      goodList: []
+      ]
     })
     const refData = toRefs(state)
     const tabClick = (name: number) => {
