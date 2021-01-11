@@ -9,10 +9,13 @@
     <van-search
       class="search-bar"
       v-model="searchParams.query"
-      shape="round"
-      background="#7232dd"
+      show-action
       placeholder="请输入搜索关键词"
-    />
+      @search="onSearch">
+      <template #action>
+        <div @click="onSearch">搜索</div>
+      </template>
+    </van-search>
     <van-tabs v-model="active" @click="tabClick" class="tabs-box">
       <van-tab v-for="item in tabs" :title="item.name" :key="item.id">
         <div class="good-content">
@@ -97,6 +100,11 @@ export default {
         state.loading = false
       }
     }
+    const onSearch = (val: string) => {
+      state.searchParams.query = val
+      state.goodList = []
+      handleSearch()
+    }
     /* 用户上滑页面, 滚动条触底, 开始加载下一页数据
     *  1. 找到滚动条触底事件
     *  2. 判断还有没有下一页数据
@@ -107,9 +115,9 @@ export default {
       // 判断是否存在下一页
       if (state.searchParams.pagenum >= state.totalPage) {
         state.loading = false
-        return Toast('没有更多了...')
+        Toast('没有更多了...')
       } else {
-        state.searchParams.pagenum++;
+        state.searchParams.pagenum++
         handleSearch()
       }
     }
@@ -120,6 +128,7 @@ export default {
       ...refData,
       active,
       tabClick,
+      onSearch,
       onClickLeft,
       onRefresh
     }

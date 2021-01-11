@@ -82,9 +82,10 @@ export default defineComponent({
         let oDom = document.querySelector('.right-cates') as Element
         oDom.scrollTop = 0
       },
+      // 跳转商品详情列表
       goToListDetail: (id: number) => {
         router.push({
-          path: '/product-list-detail',
+          path: '/goods-list',
           query: { cid: id }
         })
       }
