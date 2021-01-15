@@ -2,24 +2,29 @@
  * @description  按需引入Vant
 */
 import { 
-  Icon, Button, Tabbar, TabbarItem, Search,
-  Image as VanImage, SwipeCell, Badge, Swipe,
-  SwipeItem, Sticky, Lazyload, Grid, GridItem,
-  TreeSelect, Tab, Tabs, NavBar, Card, PullRefresh, Toast
+  Icon, Button, Tabbar, TabbarItem, Search, Toast,
+  Image as VanImage, SwipeCell, Badge, Swipe, Empty,
+  SwipeItem, Sticky, Lazyload, Grid, GridItem, Loading, Divider,
+  TreeSelect, Tab, Tabs, NavBar, Card, PullRefresh, ImagePreview,
+  ActionBar, ActionBarIcon, ActionBarButton, ShareSheet, AddressList, AddressEdit
 } from 'vant'
 const pluginsVant = [
-  Button,
   Icon,
+  Button,
   Badge,
   Search,
   Tabbar,
-  VanImage,
+  Empty,
   Swipe,
   Grid,
   Tab,
   Tabs,
   Card,
+  Toast,
   NavBar,
+  Loading,
+  Divider,
+  VanImage,
   GridItem,
   SwipeItem,
   SwipeCell,
@@ -28,7 +33,13 @@ const pluginsVant = [
   TabbarItem,
   TreeSelect,
   PullRefresh,
-  Toast
+  ImagePreview,
+  ActionBar,
+  ShareSheet,
+  ActionBarIcon,
+  ActionBarButton,
+  AddressList,
+  AddressEdit
 ]
 export const vantUI = {
   install: function(vm: any) {

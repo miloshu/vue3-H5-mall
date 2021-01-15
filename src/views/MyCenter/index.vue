@@ -1,17 +1,19 @@
 <template>
-  <div class='app'>
+  <div class='my-center-wrap'>
     <h1>个人中心</h1>
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   name: 'MyCenter',
-  data() {
-    return {}
-  },
+  components: {},
+  setup() {
+    
+  }
+  
 }
 </script>
 <style lang='scss' scoped>
-
+.my-center-wrap {}
 </style>

@@ -71,6 +71,7 @@ export default {
 .app-container {
   width: 100%;
   height: 100%;
+  text-align: left;
   // .layout-footer {
   //   height: 5rem;
   //   .van-tabbar__placeholder {

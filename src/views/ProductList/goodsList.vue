@@ -2,7 +2,7 @@
   <div class='product-list-detail'>
     <van-nav-bar
       left-text="返回"
-      title="商品详情页"
+      title="商品列表"
       left-arrow
       @click-left="onClickLeft"
     />
@@ -13,6 +13,7 @@
       placeholder="请输入搜索关键词"
       @search="onSearch">
     </van-search>
+    <loading v-show="loading"></loading>
     <van-tabs v-model="active" @click="tabClick" class="tabs-box">
       <van-tab v-for="item in tabs" :title="item.name" :key="item.id">
         <div class="good-content">
@@ -24,7 +25,9 @@
             :price="good.goods_price"
             :desc="good.goods_name"
             :thumb="good.goods_small_logo ? good.goods_small_logo : 'https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fsecretkeycrm.digifilm.com.cn%2Fupload%2F20180530%2Fe676f667c4cdfc7e074898adab2622f2.jpg&refer=http%3A%2F%2Fsecretkeycrm.digifilm.com.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1612877657&t=0309216f4e33e2e64d576153be017f31'"
+            @click="go2GoodsDetail(good)"
           />
+          <van-empty image="search" description="暂无数据" v-if="!goodList.length" />
           </van-pull-refresh>
         </div>
       </van-tab>
@@ -35,12 +38,14 @@
 <script lang="ts">
 import { onMounted, ref, reactive, toRefs } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
+import { searchCategoriesList } from '/@/api/category'
 import { Toast } from 'vant';
 import TabBar from '/@/components/TabBar/index.vue'
-import { searchCategoriesList } from '/@/api/category'
+import Loading from '/@/components/Loading/index.vue'
+
 // 类型定义
 interface searchParams {
-  query: string,
+  query: string;
   cid: number | string;
   pagenum: number;
   pagesize: number;
@@ -56,7 +61,8 @@ interface stateProps {
 export default {
   name: 'ProductListDetail',
   components: {
-    TabBar
+    TabBar,
+    Loading
   },
   setup() {
     const router = useRouter()
@@ -67,7 +73,7 @@ export default {
       totalPage: 1, // 总页数
       searchParams: {
         query: '',
-        cid: route.query.cid || 9,
+        cid: 9 || route.query.cid,
         pagenum: 1,
         pagesize: 10
       },
@@ -97,6 +103,7 @@ export default {
     const onClickLeft = () => {router.push('/product-list')}
     const handleSearch = async () => {
       try {
+        state.loading = true
         let res = await searchCategoriesList(state.searchParams)
         if (res.data.message) {
           // 获取总条数
@@ -133,6 +140,13 @@ export default {
         handleSearch()
       }
     }
+    // 商品详情
+    const go2GoodsDetail = (row: any) => {
+      router.push({
+        path: '/goods-list-detail',
+        query: { goods_id: row.goods_id }
+      })
+    }
     onMounted(() => {
       handleSearch()
     })
@@ -142,7 +156,8 @@ export default {
       tabClick,
       onSearch,
       onClickLeft,
-      onRefresh
+      onRefresh,
+      go2GoodsDetail
     }
   },
 }

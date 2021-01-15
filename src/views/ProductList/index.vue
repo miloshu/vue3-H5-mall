@@ -27,7 +27,7 @@
           </div>
           <div class="goods-list">
             <a v-for="(v, idx) in item.children" :key="idx" @click="goToListDetail(item.cat_id)">
-              <img :src="v.cat_icon" alt="">
+              <img :src="v.cat_icon" alt="" >
               <div>{{v.cat_name}}</div>
             </a>
           </div>
@@ -115,9 +115,10 @@ export default defineComponent({
       }
     })
     const refData = toRefs(state)
+    const refMethods = toRefs(methods)
     return {
       ...refData,
-      ...methods
+      ...refMethods
     }
   }
 })

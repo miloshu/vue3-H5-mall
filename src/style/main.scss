@@ -3,7 +3,6 @@ $purple: #7232dd;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
   width: 100%;
   height: 100%;
@@ -39,4 +38,7 @@ $purple: #7232dd;
 .van-nav-bar__arrow {
   font-size: 1.5rem !important;
   color: $purple !important;
+}
+.van-swipe__indicator--active {
+  background-color: $blue !important;
 }
