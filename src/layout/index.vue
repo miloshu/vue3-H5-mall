@@ -7,7 +7,7 @@
       <router-view v-else></router-view>
     </div>
     <div class="layout-footer" v-if="store.state.navBarShow">
-      <TabBar :tab-data="state.tabBar" @chang="handleChange"></TabBar>
+      <TabBar :tab-data="state.tabBar" @chang="handleChange" />
     </div>
   </div>
 </template>
@@ -68,6 +68,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../style/main.scss';
 .app-container {
   width: 100%;
   height: 100%;

@@ -12,8 +12,5 @@ export default {
 #app {
   width: 100%;
   height: 100%;
-  .van-swipe__indicator--active {
-    background-color:#7232dd !important;
-  }
 }
 </style>

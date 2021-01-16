@@ -63,7 +63,13 @@ export default {
     })
     const refData = toRefs(state)
     const methods = reactive({
-      onClickLeft: () => {router.push('/goods-list')},
+      onClickLeft: () => {
+        if (route.query.pageType) {
+          router.push('/home')
+        } else {
+          router.push('/goods-list')
+        }
+      },
       getGoodsDetailList: async () => {
         try {
           state.loading = true
@@ -76,7 +82,6 @@ export default {
     })
     const refMethods = toRefs(methods)
     onMounted(() => {
-      // console.log(Toast)
       methods.getGoodsDetailList()
     })
     return {

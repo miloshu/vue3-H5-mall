@@ -31,6 +31,10 @@ $purple: #7232dd;
 .van-tabs__nav--card {
   border-color: $purple !important;
 }
+.van-nav-bar {
+  position: fixed !important;
+  width: 100% !important;
+}
 .van-nav-bar .van-icon {
   color: $purple !important;
 }
@@ -40,5 +44,5 @@ $purple: #7232dd;
   color: $purple !important;
 }
 .van-swipe__indicator--active {
-  background-color: $blue !important;
+  background-color: $purple !important;
 }

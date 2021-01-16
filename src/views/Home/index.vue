@@ -10,7 +10,7 @@
       />
     </van-sticky>
     <van-swipe class="swipe-container" :autoplay="3000" lazy-render>
-      <van-swipe-item v-for="image in images" :key="image.goods_id">
+      <van-swipe-item v-for="image in images" :key="image.goods_id" @click="go2GoodsDetail(image)">
         <van-image :src="image.image_src" />
       </van-swipe-item>
     </van-swipe>
@@ -37,10 +37,12 @@
 <script lang="ts">
 import { onMounted, computed, reactive, toRefs } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 import { getSwiperList, getCateLIst, getFloorLIst } from '/@/api/home'
 export default {
   setup () {
     const store = useStore()
+    const router = useRouter()
     const name = computed(() => store.state.userNmae)
     const data = reactive({
       value: '',
@@ -69,6 +71,13 @@ export default {
           data.floorLIst = res.data.message
         } catch (error) {}
       },
+       // 商品详情
+      go2GoodsDetail: (row: any) => {
+        router.push({
+          path: '/goods-list-detail',
+          query: { goods_id: row.goods_id, pageType: 'Home' }
+        })
+      },
       handleBtn: () => {
         store.commit('getUserNmae', 'Vue')
       }
@@ -79,11 +88,10 @@ export default {
       methods.getFloorLIst()
     })
     const refData = toRefs(data)
-    const refMethods = toRefs(methods)
     return {
       name,
       ...refData,
-      ...refMethods
+      ...methods
     }
   }
 }
@@ -98,9 +106,6 @@ $blue: #7232dd;
     .search-bar {
       height: 100%;
     }
-  }
-  .van-swipe__indicator--active {
-    background-color: $blue;
   }
   .swipe-container .van-swipe-item {
     color: #fff;

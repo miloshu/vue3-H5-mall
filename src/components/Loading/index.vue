@@ -12,7 +12,7 @@
     }
   }
 </script>
-<style lang="scss"scoped>
+<style lang="scss" scoped>
 .loading{
   position: fixed;
   top: 0;
@@ -32,3 +32,4 @@
     margin: auto;
   }
 }
+</style>

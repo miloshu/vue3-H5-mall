@@ -5,7 +5,7 @@ import router from './router'
 // 全局引入vant样式
 import 'vant/lib/index.css'
 // 引入全局样式
-import '/@/style/index.scss'
+import './style/index.scss'
 // 屏幕适配方案
 import './assets/fontSize/index'
 // 全局引入按需引入UI库 vant
