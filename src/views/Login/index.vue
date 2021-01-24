@@ -115,7 +115,7 @@ export default defineComponent({
     height: 100%;
     background-color: #fff;
     .card{
-      margin-top: 50px;
+      margin-top: 5rem;
     }
     .btn-login {
       margin-top: 20px;

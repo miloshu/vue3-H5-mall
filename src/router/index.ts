@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import presidentRoutes from './modules/president'
+import addressRoutes from './modules/address'
 // import store from '../store'
 // import { Notify } from 'vant'
 const routes = [
@@ -47,13 +47,14 @@ const routes = [
         path: '/detail/:id',
         name: 'Detail',
         component: () => import('@/views/Detail/index.vue')
-      }
+      },
+      ...addressRoutes
     ]
   }
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes: [...routes, ...presidentRoutes]
+  routes: [...routes]
 })
 export default router

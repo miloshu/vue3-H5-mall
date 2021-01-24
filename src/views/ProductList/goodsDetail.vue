@@ -19,8 +19,8 @@
     <van-divider />
     <div class="goods-title-box">
       <div class="goods-title van-multi-ellipsis--l3">{{ goodsParam.goods_name }}</div>
-      <div class="goods-collection">
-        <van-icon name="star-o" color="#ee0a24" size="20" />
+      <div class="goods-collection" @click="handleCollect">
+        <van-icon :name="isCollect ? 'star' : 'star-o'" color="#ff5000" size="20" />
         <span class="collect-text">收藏</span>
       </div>
     </div>
@@ -51,6 +51,7 @@ import { setStorage, getStorage } from '/@/utils/storage'
 // 类型定义
 interface stateProps {
   loading: boolean;
+  isCollect: boolean;
   goods_id: number | string;
   images: any[];
   badgeNum: number | string;
@@ -68,7 +69,8 @@ export default {
       goodsParam: {},
       goods_id: route.query.goods_id as number | string,
       badgeNum: '',
-      images: []
+      images: [],
+      isCollect: false
     })
     const refData = toRefs(state)
     const methods = reactive({
@@ -111,7 +113,7 @@ export default {
       */
       onClickAddCartIcon: () => {
         let cart = getStorage('goods_cart') as any || []
-        let index = cart.findIndex(v => v.goods_id == state.goodsParam.goods_id)
+        let index = cart.findIndex(v => v.goods_id == state.goods_id)
         if (index === -1) {
           // 不存在, 第一次添加
           state.goodsParam.num = 1
@@ -125,15 +127,41 @@ export default {
         // 把购物车重新添加回缓存中
         setStorage('goods_cart', cart)
         Toast.success('加入成功')
+      },
+      // 商品收藏按钮
+      handleCollect: () => {
+        // 获取缓存中的商品收藏数组
+        let collectGoods = getStorage('collect') as any || []
+        // 判断该商品是否被收藏过
+        let index = collectGoods.findIndex(v => v.goods_id == state.goods_id)
+        if (index !== -1) {
+          // 已收藏, 在数组中删除该商品
+          collectGoods.splice(index, 1)
+          state.isCollect = false
+          Toast.success('已取消收藏')
+        } else {
+          // 未收藏过
+          collectGoods.push(state.goodsParam)
+          state.isCollect = true
+          Toast.success('收藏成功')
+        }
+        // 把收藏数组存入到缓存中
+        setStorage('collect', collectGoods)
       }
     })
     onMounted(() => {
+      // 加载缓存中的购物车数量数据
       let cart = getStorage('goods_cart') as any || []
       if (cart.length) {
+        // 判断当前数据是否已加入购物车
         cart.forEach((item:any, index:number) => {
           if (item.goods_id === +state.goods_id) state.badgeNum = item.num
         })
       }
+      // 加载缓存中的商品收藏数据
+      let collectGoods = getStorage('collect') as any || []
+      state.isCollect = collectGoods.some(v => v.goods_id == state.goods_id)
+      // 判断当前商品是否被收藏
       methods.getGoodsDetailList()
     })
     return {

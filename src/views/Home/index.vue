@@ -102,7 +102,7 @@ $blue: #7232dd;
 .home-page {
   height: 100vh;
   .van-sticky {
-    height: 50px;
+    height: 50rem;
     .search-bar {
       height: 100%;
     }

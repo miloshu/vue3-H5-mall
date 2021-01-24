@@ -2,10 +2,10 @@
  * @description  按需引入Vant
 */
 import { 
-  Icon, Button, Tabbar, TabbarItem, Search, Toast,
-  Image as VanImage, SwipeCell, Badge, Swipe, Empty,
-  SwipeItem, Sticky, Lazyload, Grid, GridItem, Loading, Divider,
-  TreeSelect, Tab, Tabs, NavBar, Card, PullRefresh, ImagePreview,
+  Icon, Button, Tabbar, TabbarItem, Search, Toast, Form, SubmitBar,
+  Image as VanImage, SwipeCell, Badge, Swipe, Empty, Checkbox, CheckboxGroup,
+  SwipeItem, Sticky, Lazyload, Grid, GridItem, Loading, Divider, Stepper,
+  TreeSelect, Tab, Tabs, NavBar, Card, PullRefresh, ImagePreview, ContactCard,
   ActionBar, ActionBarIcon, ActionBarButton, ShareSheet, AddressList, AddressEdit
 } from 'vant'
 const pluginsVant = [
@@ -20,6 +20,7 @@ const pluginsVant = [
   Tab,
   Tabs,
   Card,
+  Form,
   Toast,
   NavBar,
   Loading,
@@ -29,11 +30,16 @@ const pluginsVant = [
   SwipeItem,
   SwipeCell,
   Sticky,
+  Stepper,
+  SubmitBar,
   Lazyload,
   TabbarItem,
   TreeSelect,
   PullRefresh,
+  Checkbox,
+  CheckboxGroup,
   ImagePreview,
+  ContactCard,
   ActionBar,
   ShareSheet,
   ActionBarIcon,

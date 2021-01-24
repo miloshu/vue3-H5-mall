@@ -5,9 +5,15 @@ export default createStore({
     userName: '',
     token: TokenKey,
     navBarShow: true,
+    addressInfo: {
+      name: '',
+      tel: '',
+      address: ''
+    },
+    chooseAddressId: ''
   },
   mutations: {
-    getUserNmae(state,data) {
+    getUserName(state,data) {
       state.userName = data
     }
   },

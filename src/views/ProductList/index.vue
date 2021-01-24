@@ -129,7 +129,7 @@ $blue: #7232dd;
   width: 100%;
   height: 100vh;
   .van-sticky {
-    height: 50px;
+    height: 50rem;
     .search-bar {
       height: 100%;
     }
@@ -140,7 +140,7 @@ $blue: #7232dd;
   }
   .left-cates, .right-cates {
     height: 100%;
-    padding-bottom: 50px;
+    padding-bottom: 5rem;
     font-size: 1.3rem;
     overflow-y: auto;
     overflow-x: hidden;
