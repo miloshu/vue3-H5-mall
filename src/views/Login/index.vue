@@ -55,6 +55,7 @@
  // 在vue2中 data 在vue3中使用 reactive代替
 import { defineComponent, reactive, onMounted, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
+import { Toast } from 'vant'
 import { login, registe } from '/@/api/login'
 import Cookies from 'js-cookie'
 import store from '/@/store'
@@ -62,8 +63,8 @@ interface DataProps {
   loading: boolean;
   isRem: boolean;
   user: object;
-  login: () => void;
-  registe: () => void;
+  login?: () => void;
+  handleRegiste?: () => void;
 }
 export default defineComponent({
   setup(props, context) {
@@ -80,18 +81,18 @@ export default defineComponent({
         passWord: '',
       }
     })
-    // 方法都集中放入methods里面, 免除每次return
+    // 方法都集中放入methods里面
     const methods = reactive({
       handleLogin: () => {
         login(data.user).then(res => {
           if (res.code === 200) {
-            this.Notify({ type: 'success', message: '登录成功', duration: 1000 });
+            Toast({ type: 'success', message: '登录成功', duration: 1000 });
             sessionStorage.setItem("userInfo", state.user.userInfo);
             push(res.detail)
           } else if (res.code === 202) {
-            this.Notify({ type: 'danger', message: res.msg });
+            Toast({ type: 'danger', message: res.msg });
           } else {
-            this.Notify({ type: 'danger', message: '登陆超时，请重新登陆' })
+            Toast({ type: 'danger', message: '登陆超时，请重新登陆' })
             push('/')
           }
         })
@@ -99,11 +100,10 @@ export default defineComponent({
       handleRegiste: () => void {}
     })
     const refData = toRefs(data)
-    const refMethods = toRefs(methods)
 		// 在Vue3.0中，所有的数据和方法都通过在setup 中 return 出去，然后在template中使用
     return {
       ...refData,
-      ...refMethods
+      ...methods
     }
   }
 })

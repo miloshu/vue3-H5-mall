@@ -59,7 +59,7 @@ interface stateProps {
   [prop: string]: any;
 }
 export default {
-  name: 'ProductListDetail',
+  name: 'GoodsList',
   components: {
     TabBar,
     Loading

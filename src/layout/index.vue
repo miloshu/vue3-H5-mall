@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <div class="layout-content">
+    <div class="layout-content" :style="{height: store.state.navBarShow ? 'calc(100% - 5rem)' : '100%' }">
       <keep-alive v-if="$route.meta.keepAlive">
         <router-view></router-view>
       </keep-alive>
@@ -67,20 +67,26 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../style/main.scss';
 .app-container {
   width: 100%;
   height: 100%;
   text-align: left;
-  // .layout-footer {
-  //   height: 5rem;
-  //   .van-tabbar__placeholder {
-  //     height: 100%;
-  //   }
-  //   .van-tabbar {
-  //     height: 100%;
-  //   }
+  // .layout-content {
+  //   height: calc(100% - 5rem);
   // }
+  .layout-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 5rem;
+
+    .tab-bar-wrap,
+    .van-tabbar,
+    .van-tabbar__placeholder {
+      height: 5rem !important;
+    }
+  }
 }
 </style>

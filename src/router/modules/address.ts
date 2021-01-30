@@ -8,7 +8,7 @@ const addressRoutes = [
   {
     path: '/address-list/edit',
     name: 'AddressEdit',
-    component: () => import('@/views/AddressList/edit.vue')
+    component: () => import('/@/views/AddressList/edit.vue')
   }
 ]
 

@@ -5,7 +5,7 @@ function resetFontSize() {
   // 是以iphone5作为参考
   let scale = windowW / 320
   let newSize = 10 * scale
-  console.log(newSize, 'newSize')
+  console.log(newSize, 'fontSize')
   document.getElementsByTagName('html')[0].style.fontSize = newSize + 'px'
 }
 // 初始化

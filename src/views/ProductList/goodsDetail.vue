@@ -31,12 +31,18 @@
     </div>
     <van-action-bar>
       <van-action-bar-icon icon="chat-o" text="客服" color="#ee0a24" />
-      <van-action-bar-icon icon="share-o" text="分享" color="#ff5000" />
+      <van-action-bar-icon icon="share-o" text="分享" color="#ff5000" @click="onClickShare"  />
       <!-- <van-action-bar-icon icon="star" text="已收藏" color="#ff5000" /> -->
       <van-action-bar-icon icon="cart-o" text="购物车" :badge="badgeNum" @click="onClickCartIcon" />
       <van-action-bar-button color="#be99ff" type="warning" text="加入购物车" @click="onClickAddCartIcon" />
       <van-action-bar-button color="#7232dd" type="danger" text="立即购买" />
     </van-action-bar>
+    <van-share-sheet
+      v-model:show="showShare"
+      title="立即分享给好友"
+      :options="options"
+      @select="onSelect"
+    />
     <loading v-show="loading"></loading>
   </div>
 </template>
@@ -70,7 +76,15 @@ export default {
       goods_id: route.query.goods_id as number | string,
       badgeNum: '',
       images: [],
-      isCollect: false
+      isCollect: false,
+      showShare: false,
+      options: [
+        { name: '微信', icon: 'wechat' },
+        { name: '微博', icon: 'weibo' },
+        { name: '复制链接', icon: 'link' },
+        { name: '分享海报', icon: 'poster' },
+        { name: '二维码', icon: 'qrcode' }
+      ]
     })
     const refData = toRefs(state)
     const methods = reactive({
@@ -104,6 +118,14 @@ export default {
         }, 3000);
       },
       onClickCartIcon: () => router.push('/cart'),
+      // 分享
+      onClickShare: () => {
+        state.showShare = true
+      },
+      onSelect: (option) => {
+        Toast(option.name)
+        state.showShare = false
+      },
       /*  加入购物车
       * 1. 获取缓存中的购物车数组
       * 2. 判断当前商品对象是否存在于购物车数组中
@@ -117,6 +139,7 @@ export default {
         if (index === -1) {
           // 不存在, 第一次添加
           state.goodsParam.num = 1
+          state.goodsParam.checked = true
           cart.push(state.goodsParam)
           state.badgeNum = cart[0].num
         } else {
@@ -203,6 +226,7 @@ $blue: #7232dd;
     }
     .goods-title-box {
       display: flex;
+      // margin-top: 1rem;
     }
     .goods-title {
       flex: 5;
@@ -220,6 +244,7 @@ $blue: #7232dd;
       border-left: 1px solid rgb(235, 237, 240);
     }
     .goods-content {
+      padding-bottom: 4rem;
       h3 {
         padding: 0 1.5rem;
         font-size: 1.6rem;

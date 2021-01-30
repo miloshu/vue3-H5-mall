@@ -3,10 +3,10 @@
     <van-sticky>
       <van-search
         class="search-bar"
-        v-model="value"
         shape="round"
         background="#7232dd"
         placeholder="请输入搜索关键词"
+        @focus="onSearch"
       />
     </van-sticky>
     <van-swipe class="swipe-container" :autoplay="3000" lazy-render>
@@ -45,7 +45,6 @@ export default {
     const router = useRouter()
     const name = computed(() => store.state.userNmae)
     const data = reactive({
-      value: '',
       images: [],
       cateList: [],
       floorLIst: []
@@ -77,6 +76,9 @@ export default {
           path: '/goods-list-detail',
           query: { goods_id: row.goods_id, pageType: 'Home' }
         })
+      },
+      onSearch: () => {
+        router.push('./search')
       },
       handleBtn: () => {
         store.commit('getUserNmae', 'Vue')

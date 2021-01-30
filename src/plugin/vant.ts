@@ -4,7 +4,7 @@
 import { 
   Icon, Button, Tabbar, TabbarItem, Search, Toast, Form, SubmitBar,
   Image as VanImage, SwipeCell, Badge, Swipe, Empty, Checkbox, CheckboxGroup,
-  SwipeItem, Sticky, Lazyload, Grid, GridItem, Loading, Divider, Stepper,
+  SwipeItem, Sticky, Lazyload, Grid, GridItem, Loading, Divider, Stepper, Dialog,
   TreeSelect, Tab, Tabs, NavBar, Card, PullRefresh, ImagePreview, ContactCard,
   ActionBar, ActionBarIcon, ActionBarButton, ShareSheet, AddressList, AddressEdit
 } from 'vant'
@@ -22,6 +22,7 @@ const pluginsVant = [
   Card,
   Form,
   Toast,
+  Dialog,
   NavBar,
   Loading,
   Divider,

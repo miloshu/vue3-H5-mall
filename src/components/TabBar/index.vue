@@ -5,6 +5,7 @@
         v-for="(item,index) in tabData"
         :key="index"
         :to="item.to"
+        :badge="item.to.name === 'Cart' ? badge : ''"
         :icon="item.icon">
         {{item.title}}
       </van-tabbar-item>
@@ -13,7 +14,8 @@
 </template>
 
 <script lang="ts">
-import { ref } from 'vue'
+import { ref, reactive, toRefs, onMounted, computed } from 'vue'
+import { setStorage, getStorage } from '/@/utils/storage'
 export default {
   name: 'TabBar',
   props: {
@@ -26,11 +28,23 @@ export default {
   setup (props, context) {
     // console.log(props.data,'props')
     const active = ref(0)
+    const state = reactive({
+      badge: 0,
+      goodsList: []
+    })
+    const refData = toRefs(state)
     const handleChange = (value: number) => {
       context.emit('chang', value)
     }
+    // 页面加载完毕
+    onMounted(() => {
+      let cart = getStorage('goods_cart') as any || []
+      cart.forEach(item => state.goodsList.push(item.num))
+      state.goodsList.forEach(e => state.badge += e)
+    })
     return {
       active,
+      ...refData,
       handleChange
     }
   }

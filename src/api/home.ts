@@ -27,3 +27,12 @@ export function getFloorLIst(params: object) {
     params
   })
 }
+
+// 搜索中心
+export function qsearch(params: object) {
+  return axios({
+    method: 'get',
+    url: `${baseURL}/api/public/v1/goods/qsearch`,
+    params
+  })
+}

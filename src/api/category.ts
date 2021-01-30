@@ -24,4 +24,11 @@ export function getGoodsDetailList(params: any) {
     params
   })
 }
-
+// 历史订单列表
+export function getAllhistoryOrderList(params: any) {
+  return axios({
+    method: 'get',
+    url: `${baseURL}/api/public/v1/my/orders/all`,
+    params
+  })
+}

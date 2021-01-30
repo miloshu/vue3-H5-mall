@@ -30,12 +30,12 @@ const routes = [
       },
       {
         path: '/goods-list',
-        name: 'goodsList',
+        name: 'GoodsList',
         component: () => import('/@/views/ProductList/goodsList.vue')
       },
       {
         path: '/goods-list-detail',
-        name: 'goodsDetail',
+        name: 'GoodsDetail',
         component: () => import('/@/views/ProductList/goodsDetail.vue')
       },
       {
@@ -46,7 +46,17 @@ const routes = [
       {
         path: '/detail/:id',
         name: 'Detail',
-        component: () => import('@/views/Detail/index.vue')
+        component: () => import('/@/views/Detail/index.vue')
+      },
+      {
+        path: '/payment-order',
+        name: 'Payment',
+        component: () => import('/@/views/Payment/index.vue')
+      },
+      {
+        path: '/search',
+        name: 'Search',
+        component: () => import('/@/views/Search/index.vue')
       },
       ...addressRoutes
     ]

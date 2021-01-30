@@ -52,7 +52,7 @@ export default {
         address: '广东省深圳市福田区',
       },
     ];
-    // provide('currentContact1', list)
+    // provide('currentContact', list)
     const onAdd = () => {
       router.push('/address-list/edit')
     };
