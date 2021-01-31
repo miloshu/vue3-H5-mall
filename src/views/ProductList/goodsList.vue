@@ -72,8 +72,8 @@ export default {
       loading: false,
       totalPage: 1, // 总页数
       searchParams: {
-        query: '',
-        cid: 9 || route.query.cid,
+        query: route.query.query || '',
+        cid: route.query.cid || '',
         pagenum: 1,
         pagesize: 10
       },

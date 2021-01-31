@@ -15,7 +15,7 @@
       </van-swipe-item>
     </van-swipe>
     <van-grid>
-      <van-grid-item v-for="(cate, index) in cateList" :key="index">
+      <van-grid-item v-for="(cate, index) in cateList" :key="index" @click="go2ProductList">
         <van-image :src="cate.image_src" />
       </van-grid-item>
     </van-grid>
@@ -26,7 +26,7 @@
           <img :src="floor.floor_title.image_src" alt="">
         </div>
         <!-- 内容 -->
-        <div class="floor-list" v-for="item in floor.product_list" :key="item.name">
+        <div class="floor-list" v-for="item in floor.product_list" :key="item.name" @click="go2GoodsList(item)">
           <img :src="item.image_src" alt="">
         </div>
       </div>
@@ -75,6 +75,19 @@ export default {
         router.push({
           path: '/goods-list-detail',
           query: { goods_id: row.goods_id, pageType: 'Home' }
+        })
+      },
+      // 商品列表product-list
+      go2ProductList: (row: any) => {
+        router.push({
+          path: '/product-list'
+        })
+      },
+      go2GoodsList: (row: any) => {
+        const names = row.navigator_url.split('=')
+        router.push({
+          path: '/goods-list',
+          query: {query: names[1]}
         })
       },
       onSearch: () => {

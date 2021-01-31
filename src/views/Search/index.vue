@@ -3,6 +3,7 @@
     <van-search
       v-model="value"
       show-action
+      autofocus
       class="search-box"
       placeholder="请输入搜索关键词"
       @search="onSearch"
