@@ -10,7 +10,7 @@ import './style/index.scss'
 import './assets/fontSize/index'
 // 全局引入按需引入UI库 vant
 import { vantUI } from './plugin/vant'
-
+// import '../mock.js' // mockjs
 // 全局钩子函数--监听全局路由变化
 router.beforeEach((to, from, next) => {
   // do something

@@ -56,9 +56,9 @@
 import { defineComponent, reactive, onMounted, toRefs } from 'vue'
 import { useRouter } from 'vue-router'
 import { Toast } from 'vant'
-import { login, registe } from '/@/api/login'
-import Cookies from 'js-cookie'
-import store from '/@/store'
+import { Login } from '/@/api/user'
+// import Cookies from 'js-cookie'
+// import store from '/@/store'
 interface DataProps {
   loading: boolean;
   isRem: boolean;
@@ -84,17 +84,21 @@ export default defineComponent({
     // 方法都集中放入methods里面
     const methods = reactive({
       handleLogin: () => {
-        login(data.user).then(res => {
-          if (res.code === 200) {
-            Toast({ type: 'success', message: '登录成功', duration: 1000 });
-            sessionStorage.setItem("userInfo", state.user.userInfo);
-            push(res.detail)
-          } else if (res.code === 202) {
-            Toast({ type: 'danger', message: res.msg });
-          } else {
-            Toast({ type: 'danger', message: '登陆超时，请重新登陆' })
-            push('/')
-          }
+        Login({
+          username: "lisi",
+          password: "123456"
+        }).then(res => {
+          console.log(res, 88888)
+          // if (res.code === 200) {
+          //   Toast({ type: 'success', message: '登录成功', duration: 1000 });
+          //   sessionStorage.setItem("userInfo", state.user.userInfo);
+          //   push(res.detail)
+          // } else if (res.code === 202) {
+          //   Toast({ type: 'danger', message: res.msg });
+          // } else {
+          //   Toast({ type: 'danger', message: '登陆超时，请重新登陆' })
+          //   push('/')
+          // }
         })
       },
       handleRegiste: () => void {}

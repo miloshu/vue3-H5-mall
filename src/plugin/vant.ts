@@ -6,7 +6,8 @@ import {
   Image as VanImage, SwipeCell, Badge, Swipe, Empty, Checkbox, CheckboxGroup,
   SwipeItem, Sticky, Lazyload, Grid, GridItem, Loading, Divider, Stepper, Dialog,
   TreeSelect, Tab, Tabs, NavBar, Card, PullRefresh, ImagePreview, ContactCard,
-  ActionBar, ActionBarIcon, ActionBarButton, ShareSheet, AddressList, AddressEdit
+  ActionBar, ActionBarIcon, ActionBarButton, ShareSheet, AddressList, AddressEdit,
+  Col, Row, Field, Switch
 } from 'vant'
 const pluginsVant = [
   Icon,
@@ -21,6 +22,10 @@ const pluginsVant = [
   Tabs,
   Card,
   Form,
+  Col,
+  Row,
+  Field,
+  Switch,
   Toast,
   Dialog,
   NavBar,
