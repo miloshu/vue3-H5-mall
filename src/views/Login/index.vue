@@ -16,7 +16,7 @@
             <input class="phone" type="tel" placeholder="手机号码" v-model="phone" @focus="picHidefocus()" @blur="picHideBlue()">
           </div>
         </div>
-        <div class="theme-bg login-submit" @click="login()">确定</div>
+        <div class="theme-bg login-submit" @click="handleLogin()">确定</div>
       </div>
     </div>
   </div>

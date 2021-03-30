@@ -1,7 +1,7 @@
 const { resolve } = require('path');
 const proxyPlugin = require('vite-plugin-proxy')
 const path = require('path')
-const userList = require('./src/api/userList');
+// const userList = require('./src/api/userList');
 const vantTheme = path.resolve(__dirname, "../style/var.scss")
 export default {
   alias: {
