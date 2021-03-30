@@ -12,7 +12,7 @@ export function getSwiperList(params: object) {
   })
 }
 // 获取导航数据
-export function getCateLIst(params: object) {
+export function getCateList(params: object) {
   return axios({
     method: 'get',
     url: `${baseURL}/api/public/v1/home/catitems`,
@@ -20,7 +20,7 @@ export function getCateLIst(params: object) {
   })
 }
 // 楼层数据
-export function getFloorLIst(params: object) {
+export function getFloorList(params: object) {
   return axios({
     method: 'get',
     url: `${baseURL}/api/public/v1/home/floordata`,

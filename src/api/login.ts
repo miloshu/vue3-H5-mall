@@ -5,10 +5,10 @@ import md5 from "js-md5";
 export function login(data: object) {
   return request({
     method: 'post',
-    url: '/api/v1/login',
-    params: {
-      userName: data.userName,
-      passWord: hex_sha1(md5(data.passWord)),
+    url: '/user/login',
+    data: {
+      username: data.username,
+      password: hex_sha1(md5(data.password)),
     }
   })
 }
@@ -30,3 +30,4 @@ export function getUserInfo(params) {
     params
   })
 }
+

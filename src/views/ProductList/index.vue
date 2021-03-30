@@ -3,10 +3,10 @@
     <van-sticky>
       <van-search
         class="search-bar"
-        v-model="searchVal"
         shape="round"
         background="#7232dd"
         placeholder="请输入搜索关键词"
+        @focus="onSearch"
       />
     </van-sticky>
     <div class="product-content">
@@ -44,7 +44,6 @@ import { setStorage, getStorage } from '/@/utils/storage'
 import { useRouter } from 'vue-router'
 // 类型定义
 interface stateProps {
-  searchVal: string;
   activeId: number;
   activeIndex: number;
   lists: any[];
@@ -55,7 +54,6 @@ export default defineComponent({
   setup () {
     const router = useRouter()
     const state: stateProps = reactive({
-      searchVal: '',
       activeId: 1,
       activeIndex: 0,
       lists: [],
@@ -88,6 +86,9 @@ export default defineComponent({
           path: '/goods-list',
           query: { cid: id }
         })
+      },
+      onSearch: () => {
+        router.push('./search')
       }
     })
     onMounted(() => {

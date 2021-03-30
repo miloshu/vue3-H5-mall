@@ -26,12 +26,12 @@ service.interceptors.request.use(
 service.interceptors.response.use(
   response => {
     const res = response.data
-    if (res.status && res.status !== 200) {
-      Notify({ type: 'danger', message: res.msg })
-      return Promise.reject(res)
-    } else {
-      return Promise.resolve(res)
-    }
+    // if (res.status && res.status !== 200) {
+    //   Notify({ type: 'danger', message: res.msg })
+    //   return Promise.reject(res)
+    // } else {
+    //   return Promise.resolve(res)
+    // }
   },
   error => {
     console.log('err' + error)

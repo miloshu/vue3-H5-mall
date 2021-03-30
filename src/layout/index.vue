@@ -33,7 +33,7 @@ export default {
           icon: 'home-o'
         },
         {
-          title: '商品列表',
+          title: '商品分类',
           to: {
             name: 'ProductList'
           },

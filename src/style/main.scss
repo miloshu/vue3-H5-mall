@@ -46,3 +46,6 @@ $purple: #7232dd;
 .van-swipe__indicator--active {
   background-color: $purple !important;
 }
+.van-checkbox__icon--checked .van-icon {
+  background-color: $purple !important;
+}

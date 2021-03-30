@@ -6,7 +6,7 @@
         shape="round"
         background="#7232dd"
         placeholder="请输入搜索关键词"
-        @focus="onSearch"
+        @focus="onSearch" 
       />
     </van-sticky>
     <van-swipe class="swipe-container" :autoplay="3000" lazy-render>
@@ -38,7 +38,7 @@
 import { onMounted, computed, reactive, toRefs } from 'vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
-import { getSwiperList, getCateLIst, getFloorLIst } from '/@/api/home'
+import { getSwiperList, getCateList, getFloorList } from '/@/api/home'
 export default {
   setup () {
     const store = useStore()
@@ -58,15 +58,15 @@ export default {
           }
         } catch (error) {}
       },
-      getCateLIst: async () => {
+      getCateList: async () => {
         try {
-          const res = await getCateLIst({})
+          const res = await getCateList({})
           data.cateList = res.data.message
         } catch (error) {}
       },
-      getFloorLIst: async () => {
+      getFloorList: async () => {
         try {
-          const res = await getFloorLIst({})
+          const res = await getFloorList({})
           data.floorLIst = res.data.message
         } catch (error) {}
       },
@@ -99,8 +99,8 @@ export default {
     })
     onMounted(() => {
       methods.getSwiperList()
-      methods.getCateLIst()
-      methods.getFloorLIst()
+      methods.getCateList()
+      methods.getFloorList()
     })
     const refData = toRefs(data)
     return {

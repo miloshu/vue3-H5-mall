@@ -48,7 +48,7 @@ export default {
         query: { goods_id: row.goods_id, pageType: 'Home' }
       })
     }
-    const onCancel = () => {router.push('./home')}
+    const onCancel = () => {router.go(-1)}
     return {
       ...refData,
       onSearch,
