@@ -5,7 +5,7 @@
         v-for="(item,index) in tabData"
         :key="index"
         :to="item.to"
-        :badge="item.to.name === 'Cart' ? badge : ''"
+        :badge="item.to.name === 'Cart' ? (badge > 0 ? badge : '') : ''"
         :icon="item.icon">
         {{item.title}}
       </van-tabbar-item>

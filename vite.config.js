@@ -28,6 +28,7 @@ export default {
   minify: 'esbuild',// 压缩
   hostname: "localhost",// ip地址
   port: 3000, // 端口号
+  hot: true,
   open: true, // 是否自动在浏览器打开
   https: false,// 是否开启 https
   ssr: false,//是否服务端渲染
